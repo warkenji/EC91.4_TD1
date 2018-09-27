@@ -33,3 +33,6 @@ class Animal(models.Model):
 
     def __str__(self):
         return '%s (%s)' % (self.nom_commun, self.nom_scientifique)
+
+    class Meta:
+        verbose_name_plural = 'animaux'
