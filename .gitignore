@@ -1,6 +1,7 @@
 
-### JavaScript ###
-build.js
+### Django Static ###
+bundle.js
+bundle.css
 
 # Created by https://www.gitignore.io/api/node,python,django
 
