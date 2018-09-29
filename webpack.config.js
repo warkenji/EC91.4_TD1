@@ -1,18 +1,44 @@
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
-    entry: './project/ifap/static/ifap/js/src/index.js',
+module.exports = [{
+    name: "ifap",
+    devtool: 'inline-source-map',
+    entry: {
+        bundle: [
+            './project/ifap/assets/ts/main.ts',
+            './project/ifap/assets/scss/main.scss'
+        ]
+    },
     output: {
-        filename: "build.js",
-        path: path.resolve(__dirname, "project/ifap/static/ifap/js")
+        filename: "js/[name].js",
+        path: path.resolve(__dirname, "project/ifap/static/ifap")
     },
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                test: /\.ts$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader"
+                ]
             }
         ]
+    }
+    ,
+    resolve: {
+        extensions: [ '.ts', '.js' ]
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "css/[name].css"
+        })
+    ],
     mode: "development"
-};
+}];
