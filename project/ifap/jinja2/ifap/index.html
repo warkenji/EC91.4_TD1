@@ -7,6 +7,31 @@
     <link type="text/css" rel="stylesheet" href="{{ static("ifap/css/bundle.css") }}">
 </head>
 <body>
+<div class="w-100 d-flex align-items-center justify-content-around">
+    <label for="classe">Classe</label>
+    <label for="ordre">Ordre</label>
+    <label for="famille">Famille</label>
+</div>
+<div class="w-100 d-flex justify-content-around">
+    <div class="w-100 d-flex justify-content-center">
+        <select id="classe" class="w-75">
+        <option value="">Tous</option>
+        {% for classe in classes %}
+            <option value="{{ classe.id }}">{{ classe.nom }}</option>
+        {% endfor %}
+    </select>
+    </div>
 
+    <div class="w-100 d-flex justify-content-center">
+        <select id="ordre" class="w-75">
+        </select>
+    </div>
+
+    <div class="w-100 d-flex justify-content-center">
+        <select id="famille" class="w-75">
+        </select>
+    </div>
+
+</div>
 </body>
 </html>
