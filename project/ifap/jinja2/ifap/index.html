@@ -7,27 +7,53 @@
     <link type="text/css" rel="stylesheet" href="{{ static("ifap/css/bundle.css") }}">
 </head>
 <body>
+
+<select class="select-classe d-none">
+    {% for classe in classes %}
+        <option value="{{ classe.id }}">{{ classe.nom }}</option>
+    {% endfor %}
+</select>
+{% for classe in classes %}
+    <div id="select-classe-{{ classe.id }}">
+        <select class="select-ordre d-none">
+            {% for ordre in classe.ordres.all() %}
+                <option value="{{ ordre.id }}">{{ ordre.nom }}</option>
+            {% endfor %}
+        </select>
+        {% for ordre in classe.ordres.all() %}
+
+
+            <div id="select-ordre-{{ ordre.id }}">
+                <select class="select-famille d-none">
+                    {% for famille in ordre.familles.all() %}
+                        <option value="{{ famille.id }}">{{ famille.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
 <div class="d-flex w-100 flex-column align-items-center">
     {% for classe in classes %}
-        <p>Classe: {{ classe.nom }}</p>
+        <p id="classe-{{ classe.id }}" class="classe">Classe: {{ classe.nom }}</p>
 
         {% for ordre in classe.ordres.all() %}
-            <p>Ordre: {{ ordre.nom }}</p>
+            <p id="ordre-{{ ordre.id }}" class="ordre">Ordre: {{ ordre.nom }}</p>
 
             {% for famille in ordre.familles.all() %}
-                <p>Famille: {{ famille.nom }}</p>
+                <p id="famille-{{ classe.id }}" class="famille">Famille: {{ famille.nom }}</p>
 
                 {% for animal in famille.animaux.all() %}
-                    <div class="w-100 d-flex justify-content-around">
-                    <p>Animal [Nom Scientifique]: {{ animal.nom_scientifique }}</p>
+                    <div id="animal-{{ animal.id }}" class="animal w-100 d-flex justify-content-around">
+                        <p>Animal [Nom Scientifique]: {{ animal.nom_scientifique }}</p>
 
-                    <p>Animal [Nom Commun]:
-                        {% if animal.nom_scientifique == animal.nom_commun %}
-                            -
-                        {% else %}
-                        {{ animal.nom_commun }}
-                    {% endif %}
-                    </p>
+                        <p>Animal [Nom Commun]:
+                            {% if animal.nom_scientifique == animal.nom_commun %}
+                                -
+                            {% else %}
+                                {{ animal.nom_commun }}
+                            {% endif %}
+                        </p>
                     </div>
                 {% endfor %}
             {% endfor %}
