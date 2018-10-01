@@ -6,6 +6,7 @@
   "author": "Warren Gaspard <warren.gsprd@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/jquery": "^3.3.10",
     "bootstrap": "^4.1.3",
     "css-loader": "^1.0.0",
     "inline-source-map": "^0.6.2",
