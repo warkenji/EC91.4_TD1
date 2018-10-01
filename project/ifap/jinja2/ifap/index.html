@@ -7,31 +7,32 @@
     <link type="text/css" rel="stylesheet" href="{{ static("ifap/css/bundle.css") }}">
 </head>
 <body>
-<div class="w-100 d-flex align-items-center justify-content-around">
-    <label for="classe">Classe</label>
-    <label for="ordre">Ordre</label>
-    <label for="famille">Famille</label>
-</div>
-<div class="w-100 d-flex justify-content-around">
-    <div class="w-100 d-flex justify-content-center">
-        <select id="classe" class="w-75">
-        <option value="">Tous</option>
-        {% for classe in classes %}
-            <option value="{{ classe.id }}">{{ classe.nom }}</option>
+<div class="d-flex w-100 flex-column align-items-center">
+    {% for classe in classes %}
+        <p>Classe: {{ classe.nom }}</p>
+
+        {% for ordre in classe.ordres.all() %}
+            <p>Ordre: {{ ordre.nom }}</p>
+
+            {% for famille in ordre.familles.all() %}
+                <p>Famille: {{ famille.nom }}</p>
+
+                {% for animal in famille.animaux.all() %}
+                    <div class="w-100 d-flex justify-content-around">
+                    <p>Animal [Nom Scientifique]: {{ animal.nom_scientifique }}</p>
+
+                    <p>Animal [Nom Commun]:
+                        {% if animal.nom_scientifique == animal.nom_commun %}
+                            -
+                        {% else %}
+                        {{ animal.nom_commun }}
+                    {% endif %}
+                    </p>
+                    </div>
+                {% endfor %}
+            {% endfor %}
         {% endfor %}
-    </select>
-    </div>
-
-    <div class="w-100 d-flex justify-content-center">
-        <select id="ordre" class="w-75">
-        </select>
-    </div>
-
-    <div class="w-100 d-flex justify-content-center">
-        <select id="famille" class="w-75">
-        </select>
-    </div>
-
+    {% endfor %}
 </div>
 </body>
 </html>

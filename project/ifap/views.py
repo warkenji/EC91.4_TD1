@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from .models import Classe, Ordre, Famille, Animal
+from django.views import View
+
+from .models import Classe
 
 
-def index(request):
-    context = {
-        'classes': Classe.objects.all()
-    }
+class IndexView(View):
+    def get(self, request):
+        context = {
+            'classes': Classe.objects.all()
+        }
 
-    return render(request, 'ifap/index.html', context)
+        return render(request, 'ifap/index.html', context)
