@@ -32,7 +32,7 @@ class Animal(models.Model):
     famille = models.ForeignKey(Famille, models.CASCADE, 'animaux')
 
     def __str__(self):
-        return '%s (%s)' % (self.nom_commun, self.nom_scientifique)
+        return '{} ({})'.format(self.nom_commun, self.nom_scientifique)
 
     class Meta:
         verbose_name_plural = 'animaux'
